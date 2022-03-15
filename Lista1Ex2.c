@@ -79,10 +79,10 @@ char* adicionar(char* str){
     printf("Insira o nome: ");
     scanf("%s", nomealuno);
     getc(stdin);
-    strcat(nomealuno, divisao);                                            //adiciona o marcador
+    strcat(nomealuno, divisao);                                           
     buffer_size = strlen(nomealuno);
     str_size = strlen(str);
-    str = (char*)realloc(str, (buffer_size+str_size)*sizeof(char)+sizeof(char)); //soma o tamanho já alocado com o novo nome +1 do \0 
+    str = (char*)realloc(str, (buffer_size+str_size)*sizeof(char)+sizeof(char)); 
     strcat(str, nomealuno);
     return str;
 }
@@ -110,6 +110,7 @@ char* remover(char* str){
             return str; 
         }
         else{
+            printf("Nome nao encontrado digite novamente.\n");
             goto inicio;
             }
 }

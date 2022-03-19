@@ -21,9 +21,10 @@ int main(){
 
         printf("\nValor de var 1: %d , valor de var2 :%d", *ptr1, *ptr2);
         trocavalor(ptr1,ptr2);
-        printf("\nTrocando...")
+        printf("\nTrocando...");
         printf("\nValor de var 1 :%d , valor de var2 :%d", *ptr1, *ptr2);
-
+    free (ptr1);
+    free (ptr2);
 
 return 0;
 }

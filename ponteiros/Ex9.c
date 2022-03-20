@@ -24,7 +24,7 @@ int main(void) {
 
     for(i=0; i<3; i++){
         for(j=0; j<3; j++){
-        printf("%2f ", *(*(matriz+i)+j));
+        printf("%2x ", ((matriz+i)+j));
         }
         printf("\n");
     }

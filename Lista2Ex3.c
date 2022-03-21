@@ -1,13 +1,3 @@
-/*Faça um programa que armazena nomes.
-• O programa deve armazenar todos os nomes na mesma string.
-• O tamanho da string deve crescer e diminuir conforme nomes
-forem colocados ou removidos. Não pode ter desperdício de
-memória.
-• Faça o seguinte menu:
-– 1) Adicionar nome
-– 2) Remover nome
-– 3) Listar
-– 4) Sair*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -107,14 +97,13 @@ char* adicionar(char* str){
 }
 
 char* remover(char* str){
-    int tamanho, i, repetir, qtd;
-    char removenome[200], *start, *end, *test, *testeaxuliar, divisao[] = "\n";
+    int tamanho, i, repetir;
+    char removenome[200], *start, *end, *test, *testeaxuliar;
  
     printf("Insira o nome a ser removido da lista: ");
     gets(removenome);
     testeaxuliar = strstr(str, removenome);
     test = strtok(testeaxuliar, "\n");
-    strcat(test, divisao);
             repetir = 1;
             while (repetir)
             {   
@@ -126,13 +115,14 @@ char* remover(char* str){
             end++;  
         memmove(start, end, strlen(end)+1);     //sobrescreve a palavra com o restante da string. o +1 é para trazer o caractere nulo também. 
         tamanho = strlen(str);
-        str = (char*)realloc(str, tamanho*sizeof(char)+sizeof(char)); //diminue a quantidade de memória alocada, o +1 é para contar o caractere nulo.
-            return str; 
-        }
-        else
-            printf("Nome nao encontrado digite novamente.\n");
+        str = (char*)realloc(str, tamanho*sizeof(char)+sizeof(char)); //diminue a quantidade de memória alocada, o +1 é para contar o caractere nulo. 
+        return str;
+    }
+            else{
+            printf("Nome não encontrado digite novamente.\n");
             printf("\nDigite 1 para tentar outro nome ou 0 para voltar ao MENU: ");
             scanf("%d", &repetir); 
             getchar();
             }
+        }
 }

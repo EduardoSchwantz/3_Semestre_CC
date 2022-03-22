@@ -14,7 +14,6 @@ int main(){
 
         int repetir, opcao, sair=1;
         char *pbuffer = calloc(1,sizeof(char));
-        system("cls");
             printf("---------------Seja Bem Vindo!---------------------\n\n");
        
 while (sair){
@@ -38,15 +37,13 @@ while (sair){
                 pbuffer = adicionar(pbuffer);                
                 printf("\nDigite 1 para adicionar outro nome, e 0 para voltar ao MENU: ");
                 scanf("%d", &repetir);
-                getchar();
-                system("cls");                                           
+                getchar();                                           
             }
                                             
         break;
     case 2:    
                 repetir = 1;
             while (repetir){
-                system("cls");
                 printf("------------------Sua lista de Nomes-----------------\n%s\n", pbuffer);
                 printf("-----------------------------------------------------\n");
                 remover(pbuffer);
@@ -58,7 +55,6 @@ while (sair){
            
         break;
     case 3:     
-                system("cls");
                 printf("------------------Sua lista de Nomes-----------------\n%s\n", pbuffer);               
         break;  
     case 4:
@@ -79,7 +75,6 @@ char* adicionar(char* str){
     char divisaoNome[] = "\n", dados[200], idade[50], telefone[50];
     char separar_nome_idade[] = " -> Idade: ", complementar_idade[] = " Anos";
     char separar_idade_telefone[] = " -> Telefone: ";
-    system("cls");
     printf("------------------Insira os Dados-----------------");
     printf("\nInsira o nome: ");
     gets(dados);
@@ -97,13 +92,12 @@ char* adicionar(char* str){
     str_size = strlen(str);
     str = (char*)realloc(str, (buffer_size+str_size)*sizeof(char)+sizeof(char)); 
     strcat(str, dados);
-    system("cls");
     return str;
 }
 
 char* remover(char* str){
     int tamanho, i;
-    char removenome[20], *start, *end, *testeauxiliar = calloc(strlen(str), sizeof(char)), *guard = calloc(strlen(str), sizeof(char));
+    char removenome[20], *start, *end, *testeauxiliar, *guard = calloc(strlen(str), sizeof(char));
     printf("Insira o nome a ser removido da lista: ");
     gets(removenome);
 if (strstr(str, removenome) != NULL){
@@ -114,27 +108,24 @@ if (strstr(str, removenome) != NULL){
        
              
         tamanho = strlen(guard)+1;       
-        start = strstr(str, testeauxiliar);            //achado o ponteiro pro começo da palavra a ser retirada, ou Null caso ela n exista
-        end = start;                            //guarda o local do começo da palavra a ser retirada
-            for(i=0; i<tamanho; i++)            //end agora aponta pra primeira letra da proxima palavra
+        start = strstr(str, testeauxiliar);            
+        end = start;                            
+            for(i=0; i<tamanho; i++)            
             end++;  
         memmove(start, end, strlen(end)+1);
         tamanho = strlen(str);
-        str = (char*)realloc(str, tamanho*sizeof(char)+sizeof(char)); //diminue a quantidade de memória alocada, o +1 é para contar o caractere nulo.    
-        system("cls");
+        str = (char*)realloc(str, tamanho*sizeof(char)+sizeof(char));   
         printf("Nome removido!!\n");
+        free(guard);
         return str;
         }
-        system("cls");
         printf("Nome nao encontrado digite novamente.\n");
-        free(testeauxiliar);
         free(guard);
         return str; 
          
 }
 char* buscar(char* str){
-    char buscarnome[20], *testeauxiliar,*guard = calloc(strlen(str), sizeof(char));
-    system("cls");
+    char buscarnome[20], *testeauxiliar, *guard = calloc(strlen(str), sizeof(char));
     printf("Insira o nome para buscar:\n");
     gets(buscarnome);
     if (strstr(str, buscarnome) != NULL)
@@ -142,15 +133,14 @@ char* buscar(char* str){
     testeauxiliar = strstr(str, buscarnome);
     strcat(guard, testeauxiliar);
     guard = strtok(guard, "\n");
-    system("cls");
     printf("------------------Dados-----------------");
     printf("\n%s\n",guard);
     free(guard);
     return str;
     }
     else{   
-    printf("Nome nao encontrado\n");    
-    free(guard);
+    printf("Nome nao encontrado\n");
+    free(guard);    
     return str;
     }    
 }

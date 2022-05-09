@@ -31,10 +31,11 @@ int main(){
 
     do{
             printf("\n\n\n             Selecione uma opção:             \n");
-            printf(" 1 - Inserir Números Aleatorios na lista.\n");
-            printf(" 2 - Remover \n");
-            printf(" 3 - Imprimir árvore\n");           
-            printf(" 4 - Sair\n");
+            printf(" 1 - Inserir número à lista.\n");
+            printf(" 2 - Inserir número aleatorio na lista.\n");
+            printf(" 3 - Remover número da lista.\n");
+            printf(" 4 - Imprimir árvore.\n");           
+            printf(" 5 - Sair.\n");
             printf("\n             Digite uma opção:             \n");
             scanf("%d", &((int*)opcao)[1]);
             getchar();
@@ -42,37 +43,43 @@ int main(){
             
     switch (((int*)opcao)[1])
    {
-    case 1: 
-            Qtd_Numeros = 0;
-            printf("\nQuantos Números deseja Inserir?\n");
-            scanf("%d", &Qtd_Numeros);
+    case 1:
+                valor = 0;
+                printf("\nDigite o número que deseja adicionar na árvore: ");
+                scanf("%d", &valor);            
+                raiz = inserir(raiz, valor);    
+        break;
+    case 2: 
+                Qtd_Numeros = 0;
+                printf("\nQuantos números aleatórios deseja Inserir?\n");
+                scanf("%d", &Qtd_Numeros);
             for (int i = 0; i < Qtd_Numeros; i++){
                 valor = 0;
                 valor =  rand() % 3000;
                 raiz = inserir(raiz, valor);
             }
         break;
-    case 2:
-            valor = 0;
-            system("clear||cls");
-            printf("\n             Sua Árvore!!             \n");   
-            imprimir(raiz, 1);
-            printf("\n\n\nDigite o Valor a ser removido:\n");
-            scanf("%d", &valor);
-            remover(raiz, valor);      
+    case 3:
+                valor = 0;
+                system("clear||cls");
+                printf("\n             Sua Árvore!!             \n");   
+                imprimir(raiz, 1);
+                printf("\n\n\nDigite o Valor a ser removido:\n");
+                scanf("%d", &valor);
+                remover(raiz, valor);      
         break;
-    case 3: 
-            system("clear||cls");    
-            printf("\n             Sua Árvore!!             \n");   
-            imprimir(raiz, 1);
+    case 4: 
+                system("clear||cls");    
+                printf("\n             Sua Árvore!!             \n");   
+                imprimir(raiz, 1);
         break;  
-    case 4:          
-            printf("\n             Encerrando Programa!!             \n");
-            *(int*) sair = 0;
+    case 5:          
+                printf("\n             Encerrando Programa!!             \n");
+                *(int*) sair = 0;
         break;
     default:
-            printf("\n             Opção Invalida!!                         \n");
-            printf("\n             Digite Uma Opção valida.             \n");
+                printf("\n             Opção Invalida!!                         \n");
+                printf("\n             Digite Uma Opção valida.             \n");
    }       
 } while (*(int*)sair);
 
@@ -238,7 +245,7 @@ void imprimir(No *raiz, int nivel){
         printf("\n\n");
 
         for(i = 0; i < nivel; i++)
-            printf("\t");
+            printf("      ");
 
         printf("%d", raiz->valor);
         imprimir(raiz->esquerdo, nivel + 1);
@@ -257,9 +264,8 @@ No* remover(No *raiz, int valor) {
                 printf("\n             Elemento folha removido: %d !             \n", valor);
                 return NULL;
             }
-            else{
-                    // remover nós que possuem 2 filhos
-                if(raiz->esquerdo != NULL && raiz->direito != NULL){
+            else{                    
+                if(raiz->esquerdo != NULL && raiz->direito != NULL){    // remover nós que possuem 2 filhos
                     No *aux = raiz->esquerdo;
                     while(aux->direito != NULL)
                         aux = aux->direito;

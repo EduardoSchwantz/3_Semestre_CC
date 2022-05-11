@@ -10,7 +10,7 @@ typedef struct no{
     int altura;
 }No;
 
-No* novoNo (int x);
+No* novoNo (int valor);
 int maior  (int a, int b);
 int alturaDoNo (No *no);
 int fatorDeBalanceamento (No *no);
@@ -19,7 +19,7 @@ No* rotacaoDireita (No *raiz);
 No* rotacaoDuplaDireitaEsquerda (No *raiz);
 No* rotacaoDuplaEsquerdaDireita (No *raiz);
 No* balancear(No *raiz);
-No* inserir(No *raiz, int x);
+No* inserir(No *raiz, int valor);
 void imprimir(No *raiz, int nivel);
 No* remover(No *raiz, int valor);
 
@@ -54,23 +54,20 @@ int main(){
                 printf("\nQuantos números aleatórios deseja Inserir?\n");
                 scanf("%d", &Qtd_Numeros);
             for (int i = 0; i < Qtd_Numeros; i++){
-                valor = 0;
                 valor =  rand() % 3000;
                 raiz = inserir(raiz, valor);
             }
         break;
     case 3:
                 valor = 0;
-                system("clear||cls");
-                printf("\n             Sua Árvore!!             \n");   
+                system("clear||cls");  
                 imprimir(raiz, 1);
                 printf("\n\n\nDigite o Valor a ser removido:\n");
                 scanf("%d", &valor);
                 remover(raiz, valor);      
         break;
     case 4: 
-                system("clear||cls");    
-                printf("\n             Sua Árvore!!             \n");   
+                system("clear||cls");      
                 imprimir(raiz, 1);
         break;  
     case 5:          
@@ -93,11 +90,11 @@ return 0;
 /*      Função que cria novo nó
         que retornará o endereço do nó criado.
 */
-No* novoNo(int x){
+No* novoNo(int valor){
     No *novo = malloc(sizeof(No));
 
     if(novo){
-        novo->valor = x;
+        novo->valor = valor;
         novo->esquerdo = NULL;
         novo->direito = NULL;
         novo->altura = 0;
@@ -184,20 +181,18 @@ No* rotacaoDuplaEsquerdaDireita (No *raiz){
 
 /*
     Insere um novo nó na árvore
-    raiz -> raiz da árvore
-    x -> valor a ser inserido
     Retorno: endereço do novo nó ou nova raiz após o balanceamento
 */
-No* inserir(No *raiz, int x){
+No* inserir(No *raiz, int valor){
     if(raiz == NULL) // árvore vazia
-        return novoNo(x);
+        return novoNo(valor);
     else{                           
-        if(x < raiz->valor)         // será inserido a esquerda
-            raiz->esquerdo = inserir(raiz->esquerdo, x);
-        else if(x > raiz->valor)    // será inserido direita
-            raiz->direito = inserir(raiz->direito, x);
+        if(valor < raiz->valor)         // será inserido a esquerda
+            raiz->esquerdo = inserir(raiz->esquerdo, valor);
+        else if(valor > raiz->valor)    // será inserido direita
+            raiz->direito = inserir(raiz->direito, valor);
         else
-            printf("\nO elemento '%d' já existe!\n", x); //se for igual a algum elemento aparecerá a mensagem
+            printf("\nO elemento '%d' já existe!\n", valor); //se for igual a algum elemento aparecerá a mensagem
     }
 
     //recalcula a altura da raiz
@@ -271,7 +266,6 @@ No* remover(No *raiz, int valor) {
                         aux = aux->direito;
                     raiz->valor = aux->valor;
                     aux->valor = valor;
-                    printf("\nElemento trocado: %d !\n", valor);
                     raiz->esquerdo = remover(raiz->esquerdo, valor);
                     return raiz;
                 }
@@ -284,6 +278,11 @@ No* remover(No *raiz, int valor) {
                         aux = raiz->direito;
                     free(raiz);
                     printf("\nElemento com 1 filho removido: %d !\n", valor);
+                    // recalcula a altura da raiz
+                        raiz->altura = maior(alturaDoNo(raiz->esquerdo), alturaDoNo(raiz->direito)) + 1;
+
+                    // verifica a necessidade de rebalancear a árvore
+                        raiz = balancear(raiz);
                     return aux;
                 }
             }

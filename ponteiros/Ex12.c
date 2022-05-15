@@ -6,8 +6,9 @@ Exibir os valores ordenados na tela.*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
-int * ordenar (int *a, int *b, int *c);
-int main (){
+int *ordenar(int *a, int *b, int *c);
+int main()
+{
     SetConsoleOutputCP(650001);
     int var1, var2, var3, *ptr1 = &var1, *ptr2 = &var2, *ptr3 = &var3, *retorno;
     ptr1 = malloc(sizeof(int));
@@ -22,35 +23,27 @@ int main (){
         retorno = ordenar(ptr1, ptr2, ptr3);
         printf("%d", *retorno);
     }
-    
-    
 
-    free (ptr1);
-    free (ptr2);
-    free (ptr3);
-    free (retorno);
-return 0;
+    free(ptr1);
+    free(ptr2);
+    free(ptr3);
+    free(retorno);
+    return 0;
 }
-int* ordenar (int *a, int *b, int *c){
+int *ordenar(int *a, int *b, int *c)
+{
     int *retorno;
 
     if (*a > *b && *b > *c)
     {
         /* code */
     }
-    
-
-
-
-
 
     if (*a == *b && *b == *c && *c == *a)
-    {   
+    {
         retorno = malloc(sizeof(int));
         *retorno = 1;
-        
+
         return retorno;
     }
-    
-
 }

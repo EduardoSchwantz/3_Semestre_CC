@@ -4,8 +4,9 @@ segunda variavel. Escreva o conteúdo das 2 variáveis na tela. */
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
-void troca (int *i, int *j);
-int main(){
+void troca(int *i, int *j);
+int main()
+{
     SetConsoleOutputCP(65001);
     int var1, var2, *ptr1 = &var1, *ptr2 = &var2;
     ptr1 = malloc(sizeof(int));
@@ -18,16 +19,17 @@ int main(){
     troca(ptr1, ptr2);
     printf("\nValor de var 1 :%d , valor de var2 :%d", *ptr1, *ptr2);
 
-    free (ptr1);
-    free (ptr2);
-return 0;
-} 
-void troca (int *i, int *j){
+    free(ptr1);
+    free(ptr2);
+    return 0;
+}
+void troca(int *i, int *j)
+{
     int aux;
     if (*i < *j)
-    {   
+    {
         aux = *i;
         *i = *j;
         *j = aux;
-    }   
+    }
 }

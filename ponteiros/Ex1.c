@@ -4,11 +4,15 @@ cada variavel usando os ponteiros. Imprima os valores das variaveis antes e apos
 #include <stdlib.h>
 #include <windows.h>
 
-int main(){
+int main()
+{
     SetConsoleOutputCP(65001);
-    int x = 0; int *p = &x;
-    float y = 0; float *l = &y;  
-    char z = 'B'; char *m = &z;
+    int x = 0;
+    int *p = &x;
+    float y = 0;
+    float *l = &y;
+    char z = 'B';
+    char *m = &z;
     printf("O valor de x antes da modifição é : %d\n", x);
     printf("O valor de y antes da modifição é : %.2f\n", y);
     printf("O valor de z antes da modifição é : %c\n", z);
@@ -19,5 +23,5 @@ int main(){
     printf("O valor de y depois da modificao é : %.2f\n", y);
     printf("O valor de z depois da modificao é : %c\n", z);
 
-return 0;
+    return 0;
 }

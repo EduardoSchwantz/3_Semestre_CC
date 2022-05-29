@@ -6,6 +6,9 @@
 void imprimir(int *vetor, int tam);
 void selection_sort(int *vetor, int tam);
 void insertion_sort(int *vetor, int tam);
+void quick_sort(int *vetor, int pos_esq, int pos_dir);
+int particiona(int *vetor, int inicio, int fim);
+
 int main()
 {
     SetConsoleOutputCP(65001);
@@ -19,7 +22,7 @@ int main()
         printf(" 1 - Criar vetor aleatório.\n");
         printf(" 2 - Ordenação SELECTION SORT. \n");
         printf(" 3 - Ordenação INSERTION SORT.\n");
-        printf(" 4 - \n");
+        printf(" 4 - Ordenação QUICK SORT.\n");
         printf(" 5 - Imprimir vetor.\n");
         printf(" 6 - Limpar vetor.\n");
         printf(" 7 - Sair.\n");
@@ -51,6 +54,11 @@ int main()
         case 3:
             insertion_sort(vetor, tam);
             printf("\nVetor ordenado utilizando INSERTION SORT\n");
+            imprimir(vetor, tam);
+            break;
+        case 4:
+            quick_sort(vetor, 0, tam - 1);
+            printf("\nVetor ordenado utilizando QUICK SORT\n");
             imprimir(vetor, tam);
             break;
 
@@ -116,4 +124,41 @@ void insertion_sort(int *vetor, int tam)
             vetor[j - 1] = aux;
         }
     }
+}
+
+void quick_sort(int *vetor, int inicio, int fim)
+{
+    int pivo;
+    if (fim > inicio)
+    {
+        pivo = particiona(vetor, inicio, fim);
+        quick_sort(vetor, inicio, pivo - 1);
+        quick_sort(vetor, pivo + 1, fim);
+    }
+}
+
+int particiona(int *vetor, int inicio, int fim)
+{
+    int esq, dir, pivo, aux;
+    esq = inicio;
+    dir = fim;
+    pivo = vetor[inicio];
+
+    while (esq < dir)
+    {
+        while (vetor[esq] <= pivo)
+            esq++;
+        while (vetor[dir] > pivo)
+            dir--;
+
+        if (esq < dir)
+        {
+            aux = vetor[esq];
+            vetor[esq] = vetor[dir];
+            vetor[dir] = aux;
+        }
+    }
+    vetor[inicio] = vetor[dir];
+    vetor[dir] = pivo;
+    return dir;
 }

@@ -33,7 +33,7 @@ int main()
         printf("\n             Digite uma opção:             \n");
         scanf("%d", &opcao);
         getchar();
-        system("clear||cls");
+       
         switch (opcao)
         {
         case 1:
@@ -125,18 +125,18 @@ void selection_sort(int *vetor, int tam)
         }
     }
 }
-void insertion_sort(int *vetor, int tam)
+void insertion_sort(int *vetor, int tam)        //  insere na posição correta diretamente.
 {
     int i, j, aux;
-    for (i = 0; i < tam; i++)
+    for (i = 1; i < tam; i++)       //  tam = ultima posição do vetor para testar com todos valores do vetor
     {
-        aux = vetor[i];
-        for (j = i; (j > 0) && (aux < vetor[j - 1]); j--)
-        {
-            vetor[j] = vetor[j - 1];
-            vetor[j - 1] = aux;
+        aux = vetor[i];             //  aux recebe o valor da posição do vetor que esta checando.
+        for (j = i; (j > 0) && (aux < vetor[j - 1]); j--)  //repete até encontrar o menor que ele
+        {                               
+            vetor[j] = vetor[j - 1];      //    faz a troca o maior passa pra frente.
+            vetor[j - 1] = aux;           //    menor fica antes.
         }
-    }
+    }                                     //    isso repete até testar o ultimo termo do vetor
 }
 
 void quick_sort(int *vetor, int inicio, int fim)

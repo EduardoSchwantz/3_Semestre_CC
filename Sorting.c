@@ -19,7 +19,7 @@ int main()
     int tam, opcao, sair, *vetor;
     clock_t tempo;
     srand(time(NULL));
-    
+
     do
     {
         printf("\n\n\n             Selecione uma opção:             \n");
@@ -34,7 +34,7 @@ int main()
         printf("\n             Digite uma opção:             \n");
         scanf("%d", &opcao);
         getchar();
-       
+
         switch (opcao)
         {
         case 1:
@@ -52,7 +52,7 @@ int main()
             printf("\nVetor ordenado utilizando SELECTION SORT\n");
             tempo = clock() - tempo;
             imprimir(vetor, tam);
-            printf("\n             tempo gasto para ordenar utilizando SELECTION SORT: %lf\n",((double)(tempo)/CLOCKS_PER_SEC));            
+            printf("\n             tempo gasto para ordenar utilizando SELECTION SORT: %lf\n", ((double)(tempo) / CLOCKS_PER_SEC));
             break;
 
         case 3:
@@ -62,7 +62,7 @@ int main()
             printf("\n             Vetor ordenado utilizando INSERTION SORT             \n");
             tempo = clock() - tempo;
             imprimir(vetor, tam);
-            printf("\n             tempo gasto para ordenar utilizando INSERTION SORT: %lf\n",((double)(tempo)/CLOCKS_PER_SEC));            
+            printf("\n             tempo gasto para ordenar utilizando INSERTION SORT: %lf\n", ((double)(tempo) / CLOCKS_PER_SEC));
             break;
 
         case 4:
@@ -72,7 +72,7 @@ int main()
             printf("\n             Vetor ordenado utilizando QUICK SORT             \n");
             tempo = clock() - tempo;
             imprimir(vetor, tam);
-            printf("\n             tempo gasto para ordenar utilizando QUICK SORT: %lf\n",((double)(tempo)/CLOCKS_PER_SEC));
+            printf("\n             tempo gasto para ordenar utilizando QUICK SORT: %lf\n", ((double)(tempo) / CLOCKS_PER_SEC));
             break;
 
         case 5:
@@ -82,7 +82,7 @@ int main()
             printf("\n             Vetor ordenado utilizando MERGE SORT             \n");
             tempo = clock() - tempo;
             imprimir(vetor, tam);
-            printf("\n             tempo gasto para ordenar utilizando MERGE SORT: %lf\n",((double)(tempo)/CLOCKS_PER_SEC));
+            printf("\n             tempo gasto para ordenar utilizando MERGE SORT: %lf\n", ((double)(tempo) / CLOCKS_PER_SEC));
             break;
 
         case 6:
@@ -131,31 +131,31 @@ void selection_sort(int *vetor, int tam)
     for (i = 0; i < tam; i++)
     {
         menor = i;
-        for (j = i + 1; j < tam; j++)       //  procura o menor valor dentro do vetor
-        {                                   
-            if (vetor[j] < vetor[menor])    // testa posição por posição
-                menor = j;                  // salva a posição do valor menor
-        }
-        if (i != menor)                 //  se a posição for diferente   
+        for (j = i + 1; j < tam; j++) //  procura o menor valor dentro do vetor
         {
-            troca = vetor[i];           //  troca recebe o valor da posição maior
-            vetor[i] = vetor[menor];    //  o menor é posto na posição certa
-            vetor[menor] = troca;       // o maior vai para a posição do menor
-        }                                     //    ou seja faz a troca.
+            if (vetor[j] < vetor[menor]) // testa posição por posição
+                menor = j;               // salva a posição do valor menor
+        }
+        if (i != menor) //  se a posição for diferente
+        {
+            troca = vetor[i];        //  troca recebe o valor da posição maior
+            vetor[i] = vetor[menor]; //  o menor é posto na posição certa
+            vetor[menor] = troca;    // o maior vai para a posição do menor
+        }                            //    ou seja faz a troca.
     }
 }
-void insertion_sort(int *vetor, int tam)        //  insere na posição correta diretamente.
+void insertion_sort(int *vetor, int tam) //  insere na posição correta diretamente.
 {
     int i, j, aux;
-    for (i = 1; i < tam; i++)       //  tam = ultima posição do vetor para testar com todos valores do vetor
+    for (i = 1; i < tam; i++) //  tam = ultima posição do vetor para testar com todos valores do vetor
     {
-        aux = vetor[i];             //  aux recebe o valor da posição do vetor que esta checando.
-        for (j = i; (j > 0) && (aux < vetor[j - 1]); j--)  //repete até encontrar o menor que ele
-        {                               
-            vetor[j] = vetor[j - 1];      //    faz a troca o maior passa pra frente.
-            vetor[j - 1] = aux;           //    menor fica antes.
+        aux = vetor[i];                                   //  aux recebe o valor da posição do vetor que esta checando.
+        for (j = i; (j > 0) && (aux < vetor[j - 1]); j--) // repete até encontrar o menor que ele
+        {
+            vetor[j] = vetor[j - 1]; //    faz a troca o maior passa pra frente.
+            vetor[j - 1] = aux;      //    menor fica antes.
         }
-    }                                     //    isso repete até testar o ultimo termo do vetor
+    } //    isso repete até testar o ultimo termo do vetor
 }
 
 void quick_sort(int *vetor, int inicio, int fim)

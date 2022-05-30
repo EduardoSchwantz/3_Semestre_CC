@@ -17,8 +17,9 @@ int main()
 {
     SetConsoleOutputCP(65001);
     int tam, opcao, sair, *vetor;
+    clock_t tempo;
     srand(time(NULL));
-
+    
     do
     {
         printf("\n\n\n             Selecione uma opção:             \n");
@@ -37,6 +38,7 @@ int main()
         switch (opcao)
         {
         case 1:
+
             printf("\nDigite o tamanho do vetor: ");
             scanf("%d", &tam);
             vetor = (int *)malloc(tam * sizeof(int));
@@ -44,27 +46,45 @@ int main()
             break;
 
         case 2:
+            tempo = 0;
+            tempo = clock();
             selection_sort(vetor, tam - 1);
             printf("\nVetor ordenado utilizando SELECTION SORT\n");
+            tempo = clock() - tempo;
             imprimir(vetor, tam);
+            printf("\n             tempo gasto para ordenar utilizando SELECTION SORT: %lf\n",((double)(tempo)/CLOCKS_PER_SEC));            
             break;
 
         case 3:
+            tempo = 0;
+            tempo = clock();
             insertion_sort(vetor, tam - 1);
-            printf("\nVetor ordenado utilizando INSERTION SORT\n");
+            printf("\n             Vetor ordenado utilizando INSERTION SORT             \n");
+            tempo = clock() - tempo;
             imprimir(vetor, tam);
+            printf("\n             tempo gasto para ordenar utilizando INSERTION SORT: %lf\n",((double)(tempo)/CLOCKS_PER_SEC));            
             break;
+
         case 4:
+            tempo = 0;
+            tempo = clock();
             quick_sort(vetor, 0, tam - 1);
-            printf("\nVetor ordenado utilizando QUICK SORT\n");
+            printf("\n             Vetor ordenado utilizando QUICK SORT             \n");
+            tempo = clock() - tempo;
             imprimir(vetor, tam);
+            printf("\n             tempo gasto para ordenar utilizando QUICK SORT: %lf\n",((double)(tempo)/CLOCKS_PER_SEC));
             break;
 
         case 5:
+            tempo = 0;
+            tempo = clock();
             merge_sort(vetor, 0, tam - 1);
-            printf("\nVetor ordenado utilizando MERGE SORT\n");
+            printf("\n             Vetor ordenado utilizando MERGE SORT             \n");
+            tempo = clock() - tempo;
             imprimir(vetor, tam);
+            printf("\n             tempo gasto para ordenar utilizando MERGE SORT: %lf\n",((double)(tempo)/CLOCKS_PER_SEC));
             break;
+
         case 6:
             imprimir(vetor, tam);
             break;
@@ -79,7 +99,7 @@ int main()
             break;
 
         default:
-            printf("\n             Digite uma válida:             \n");
+            printf("\n             Digite uma opção válida:             \n");
         }
 
     } while (sair);
@@ -92,7 +112,7 @@ void preenche_vetor(int *vetor, int tam)
     int i;
     for (i = 0; i < tam; i++)
     {
-        vetor[i] = rand() % 999;
+        vetor[i] = rand() % 99999;
     }
 }
 
@@ -101,7 +121,6 @@ void imprimir(int *vetor, int tam)
     printf("\n             Imprimindo Vetor:             \n");
     for (int i = 0; i < tam; i++)
     {
-
         printf("%d, ", vetor[i]);
     }
 }
@@ -112,17 +131,17 @@ void selection_sort(int *vetor, int tam)
     for (i = 0; i < tam; i++)
     {
         menor = i;
-        for (j = i + 1; j < tam; j++)
-        {
-            if (vetor[j] < vetor[menor])
-                menor = j;
+        for (j = i + 1; j < tam; j++)       //  procura o menor valor dentro do vetor
+        {                                   
+            if (vetor[j] < vetor[menor])    // testa posição por posição
+                menor = j;                  // salva a posição do valor menor
         }
-        if (i != menor)
+        if (i != menor)                 //  se a posição for diferente   
         {
-            troca = vetor[i];
-            vetor[i] = vetor[menor];
-            vetor[menor] = troca;
-        }
+            troca = vetor[i];           //  troca recebe o valor da posição maior
+            vetor[i] = vetor[menor];    //  o menor é posto na posição certa
+            vetor[menor] = troca;       // o maior vai para a posição do menor
+        }                                     //    ou seja faz a troca.
     }
 }
 void insertion_sort(int *vetor, int tam)        //  insere na posição correta diretamente.

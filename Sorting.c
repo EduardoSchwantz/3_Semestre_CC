@@ -158,52 +158,52 @@ void insertion_sort(int *vetor, int tam) //  insere na posição correta diretam
     } //    isso repete até testar o ultimo termo do vetor
 }
 
-void quick_sort(int *vetor, int inicio, int fim)
-{
+void quick_sort(int *vetor, int inicio, int fim) //  algoritmo que particiona o vetor, com base no pivo,  onde todos antes serão menores e todos dps dele serão maiores
+{                                                //  "dividir e conquistar."
     int pivo;
     if (fim > inicio)
     {
-        pivo = particiona_quick_sort(vetor, inicio, fim);
-        quick_sort(vetor, inicio, pivo - 1);
-        quick_sort(vetor, pivo + 1, fim);
+        pivo = particiona_quick_sort(vetor, inicio, fim); //  chama a função para organizar o vetor com base no pivo, todos menores antes e maiores depois.
+        quick_sort(vetor, inicio, pivo - 1);              //  chama a função novamente sendo a ultima posição 1 antes do pivo
+        quick_sort(vetor, pivo + 1, fim);                 //  chama a função novamente sendo a primeira posição 1 dps do pivo
     }
 }
 
 int particiona_quick_sort(int *vetor, int inicio, int fim)
 {
     int esq, dir, pivo, aux;
-    esq = inicio;
-    dir = fim;
-    pivo = vetor[inicio];
+    esq = inicio;         //  esq recebe a posição do primeiro termo passada para a função
+    dir = fim;            //  dir recebe a posição do último termo passado para a função
+    pivo = vetor[inicio]; //  pivo sempre sera a primeira posição da partição passada
 
-    while (esq < dir)
+    while (esq < dir) // repete enquanto for esq < dir, no momento que chegarem na mesma posição a repetição para.
     {
-        while (vetor[esq] <= pivo)
-            esq++;
-        while (vetor[dir] > pivo)
-            dir--;
+        while (vetor[esq] <= pivo) //  repete até encontar um valor maior que o pivo,  e para na posição para fazer a troca.
+            esq++;                 //  cada repetição incrementa 1 posição a esquerda
+        while (vetor[dir] > pivo)  //  repete até encontar um valor menor que o pivo,  e para na posição para fazer a troca.
+            dir--;                 //  cada repetição decrementa 1 na posição da direita
 
-        if (esq < dir)
+        if (esq < dir) //  sempre que esquerda for menor que direita faz a troca dos valores.
         {
             aux = vetor[esq];
             vetor[esq] = vetor[dir];
             vetor[dir] = aux;
         }
     }
-    vetor[inicio] = vetor[dir];
-    vetor[dir] = pivo;
-    return dir;
+    vetor[inicio] = vetor[dir]; // o primeiro termo vai receber o ultimo valor antes do pivo.
+    vetor[dir] = pivo;          // e o ultimo valor antes do pivo recebe o valor do primeiro termo.
+    return dir;                 // retorna a posição do pivo dentro do vetor.
 }
 
-void merge_sort(int *vetor, int inicio, int fim)
-{
+void merge_sort(int *vetor, int inicio, int fim) // sistema de ordenação onde se divide o vetor em duas partes, utilizando algoritimo testando as duas partes
+{                                                //  e armazenando em um vetor auxiliar.
     int meio;
-    if (inicio < fim)
+    if (inicio < fim) //  se a primeira posição for menor que a última
     {
-        meio = floor(inicio + fim) / 2;
-        merge_sort(vetor, inicio, meio);
+        meio = floor(inicio + fim) / 2;  //  faz o calculo arrendonando para baixo, para saber o meio do vetor.
+        merge_sort(vetor, inicio, meio); //  chama a função novamente para cada parte.
         merge_sort(vetor, meio + 1, fim);
-        particiona_merge_sort(vetor, inicio, meio, fim);
+        particiona_merge_sort(vetor, inicio, meio, fim); // faz a ordenação das metades.
     }
 }
 
@@ -216,20 +216,20 @@ void particiona_merge_sort(int *vetor, int inicio, int meio, int fim)
     p2 = meio + 1;
     temp = (int *)malloc(tamanho * sizeof(int));
 
-    if (temp != NULL)
+    if (temp != NULL) //  se diferente de nulo
     {
-        for (i = 0; i < tamanho; i++)
+        for (i = 0; i < tamanho; i++) //  repete para todo vetor
         {
-            if (!fim1 && !fim2)
+            if (!fim1 && !fim2) // se contrario de fim1 e contrario de fim2
             {
-                if (vetor[p1] < vetor[p2])
-                    temp[i] = vetor[p1++];
+                if (vetor[p1] < vetor[p2]) // se primeira posição de p1 for menor que
+                    temp[i] = vetor[p1++]; // entao salva na posição i do vetor auxiliar o valor de p1 e incrementa ele para proximo teste
                 else
-                    temp[i] = vetor[p2++];
+                    temp[i] = vetor[p2++]; // caso contrario  salva o valor do vetor p2,  e incrementa o p2
 
-                if (p1 > meio)
+                if (p1 > meio) //  caso um dos duas metades acabe seta ele em 1
                     fim1 = 1;
-                if (p2 > fim)
+                if (p2 > fim) //  para cair no caso do outra metade ser maior e terminar de escrever no vetor auxiliar
                     fim2 = 1;
             }
             else
@@ -241,7 +241,7 @@ void particiona_merge_sort(int *vetor, int inicio, int meio, int fim)
             }
         }
         for (j = 0, k = inicio; j < tamanho; j++, k++)
-            vetor[k] = temp[j];
+            vetor[k] = temp[j]; //    passa para o vetor posição por posição ordenadamente.
     }
     free(temp);
 }

@@ -34,7 +34,7 @@ int main()
         printf("\n             Digite uma opção:             \n");
         scanf("%d", &opcao);
         getchar();
-
+        system("clear||cls");
         switch (opcao)
         {
         case 1:

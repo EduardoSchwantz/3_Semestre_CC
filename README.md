@@ -1,1 +1,1 @@
-Area reservada para adicionar exercicios referente as listas da diciplina
+Repositório reservado para diversos códigos desenvolvidos durante o terceiro semestre do curso de Ciências da Computação.

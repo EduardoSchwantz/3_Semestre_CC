@@ -1,6 +1,6 @@
 .data
 contador: .space 40
-mensagem: .asciiz "Programa ira realiza calculo de m�dia ponderada, de at� 8 notas e 8 pesos. No lugar de v�rgula usar (ponto) | . | \n"
+mensagem: .asciiz "Programa ira realiza calculo de media ponderada, de ate 8 notas e 8 pesos. No lugar de virgula usar (ponto) | . | \n"
 mensagem_nota1: .asciiz "Digite a nota 1: \n"
 mensagem_peso1: .asciiz "Digite o peso 1: \n"
 mensagem_nota2: .asciiz "Digite a nota 2: \n"
@@ -17,16 +17,16 @@ mensagem_nota7: .asciiz "Digite a nota 7: \n"
 mensagem_peso7: .asciiz "Digite o peso 7: \n"
 mensagem_nota8: .asciiz "Digite a nota 8: \n"
 mensagem_peso8: .asciiz "Digite o peso 8: \n"
-mensagem_media: .asciiz "\nSua m�dia �: \n"
-repetir: .asciiz "\nSe deseja adicionar mais notas digite 0, se deseja fazer o c�lculo da m�dia digite 1.\n"
+mensagem_media: .asciiz "\nSua media e. \n"
+repetir: .asciiz "\nSe deseja adicionar mais notas digite 0, se deseja fazer o calculo da media digite 1.\n"
 repetir_programa: .asciiz "\nSe deseja fazer nova media digite 0, se deseja encerrar o programa ditite 1.\n"
 zero: .float 0.0
 sete: .float 7.0
 dez: .float 10.0
 tres: .float 3.0
-mensagem_exame_reprovado: .asciiz "\nVoc� infelizmente est� em exame e necessita tirar: \n"
-mensagem_aprovado: .asciiz "\nVoc� Passou, sua nota foi maior ou igual a 7, e n�o precisa de exame.\n Aproveite suas f�rias. \n"
-mensagem_sem_exame_reprovado: .asciiz "\nSua m�dia foi menor que 3.0, infelizmente n�o ter� direito ao exame.\n"
+mensagem_exame_reprovado: .asciiz "\nVoce infelizmente esta em exame e necessita tirar: \n"
+mensagem_aprovado: .asciiz "\nVoce Passou, sua nota foi maior ou igual a 7, e nao precisa de exame.\n Aproveite suas ferias. \n"
+mensagem_sem_exame_reprovado: .asciiz "\nSua media foi menor que 3.0, infelizmente nao tera direito ao exame.\n"
 fim_programa: .asciiz "\nEncerrando o programa.....\n"
 .text	
 	addi $t7, $zero, 0
